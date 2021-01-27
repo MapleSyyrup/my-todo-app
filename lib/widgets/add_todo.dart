@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:my_todo_app/models/todo.dart';
-// import 'package:provider/provider.dart';
-// import '../provider/todo_provider.dart';
 
 class AddTodo extends StatefulWidget {
   final Function(String) addTodo;
@@ -56,9 +53,6 @@ class _AddTodoState extends State<AddTodo> {
                     ),
                     iconSize: 35,
                     onPressed: submitTodo,
-                    // String todo = ;
-                    // Provider.of<TodoProvider>(context, listen: false).addNewTodo(_todoController.text);
-                    
                   ),
                 ],
               ),

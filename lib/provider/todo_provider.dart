@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-// import '../widgets/add_todo.dart';
+
 import '../models/todo.dart';
-// import '../screens/todo_overview_screen.dart';
 
 class TodoProvider with ChangeNotifier {
   Map<String, Todo> _todoList = {};
