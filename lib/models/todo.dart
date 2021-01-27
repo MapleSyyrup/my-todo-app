@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class Todo with ChangeNotifier {
+class Todo {
   final String todo;
   final DateTime date;
 

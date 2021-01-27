@@ -14,8 +14,6 @@ class TodoOverviewScreen extends StatefulWidget {
 }
 
 class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
-  final _todoController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TodoProvider>(context, listen: false);
@@ -70,9 +68,11 @@ class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
               builder: (BuildContext context) {
                 return GestureDetector(
                   onTap: () {},
-                  child: AddTodo((String newTodo) {
-                    provider.addNewTodo(_todoController.text);
-                  }),
+                  child: AddTodo(
+                    (String newTodo) {
+                      provider.addNewTodo(newTodo);
+                    },
+                  ),
                   behavior: HitTestBehavior.opaque,
                 );
               });
