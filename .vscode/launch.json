@@ -7,7 +7,8 @@
         {
             "name": "my_todo_app",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "flutterMode": "debug"
         }
     ]
 }

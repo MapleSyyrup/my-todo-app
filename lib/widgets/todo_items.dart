@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
+
+import 'package:intl/intl.dart';
 
 import '../models/todo.dart';
 
 class TodoItems extends StatefulWidget {
   static const routeName = '/todo-items';
   final Todo todo;
-  final Todo date;
 
-  const TodoItems({this.todo, this. date});
+  TodoItems({this.todo});
 
   @override
   _TodoItemsState createState() => _TodoItemsState();
@@ -18,6 +18,7 @@ class _TodoItemsState extends State<TodoItems> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Color.fromRGBO(202, 240, 248, 1),
       elevation: 5,
       margin: const EdgeInsets.symmetric(
         horizontal: 7,
@@ -25,12 +26,16 @@ class _TodoItemsState extends State<TodoItems> {
       ),
       child: ListTile(
         title: Text(
-          widget.todo.todo,
-          style: Theme.of(context).textTheme.subtitle1,
+          widget.todo.task,
+          style: TextStyle(
+            fontStyle: FontStyle.normal,
+            fontSize: 20,
+          ),
         ),
-        // subtitle: Text(
-        //   DateFormat.yMMMEd().format(widget.todo.date),
-        // ),
+        subtitle: Text(
+          DateFormat.yMMMEd().add_jm().format(DateTime.parse(widget.todo.date)),
+          style: TextStyle(fontStyle: FontStyle.italic),
+        ),
       ),
     );
   }

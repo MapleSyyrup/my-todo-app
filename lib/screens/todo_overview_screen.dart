@@ -16,7 +16,7 @@ class TodoOverviewScreen extends StatefulWidget {
 class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<TodoProvider>(context, listen: false);
+    final provider = Provider.of<TodoProvider>(context, listen: true);
 
     return Scaffold(
       appBar: AppBar(

@@ -13,9 +13,9 @@ class TodoProvider with ChangeNotifier {
 
   void addNewTodo(String newtodo, String newDate) {
     if (_todoList.containsKey(newDate)) {
-      _todoList.update(newDate, (existing) => Todo(todo: existing.todo, date: existing.date));
+      _todoList.update(newDate, (existing) => Todo(task: existing.task, date: existing.date));
     } else {
-      _todoList.putIfAbsent(newDate, () => Todo(todo: newtodo, date: DateTime.now()));
+      _todoList.putIfAbsent(newDate, () => Todo(task: newtodo, date: DateTime.now().toString(),));
     }
     notifyListeners();
   }

@@ -42,7 +42,7 @@ class _AddTodoState extends State<AddTodo> {
               TextField(
                 decoration: InputDecoration(labelText: 'What to do?'),
                 controller: _todoController,
-                // onSubmitted: (_) => submitTodo(),
+                autofocus: true,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
