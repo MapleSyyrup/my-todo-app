@@ -11,11 +11,11 @@ class TodoProvider with ChangeNotifier {
 
   int get todoCount => _todoList.length;
 
-  void addNewTodo(String newtodo) {
-    if (_todoList.containsKey(newtodo)) {
-      _todoList.update(newtodo, (existingTodo) => Todo(todo: existingTodo.todo));
+  void addNewTodo(String newtodo, String newDate) {
+    if (_todoList.containsKey(newDate)) {
+      _todoList.update(newDate, (existing) => Todo(todo: existing.todo, date: existing.date));
     } else {
-      _todoList.putIfAbsent(newtodo, () => Todo(todo: newtodo));
+      _todoList.putIfAbsent(newDate, () => Todo(todo: newtodo, date: DateTime.now()));
     }
     notifyListeners();
   }

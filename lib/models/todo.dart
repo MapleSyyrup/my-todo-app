@@ -6,7 +6,7 @@ class Todo {
 
   Todo({
     @required this.todo,
-    this.date,
+    @required this.date,
   });
 
 }

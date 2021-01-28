@@ -69,8 +69,8 @@ class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
                 return GestureDetector(
                   onTap: () {},
                   child: AddTodo(
-                    (String newTodo) {
-                      provider.addNewTodo(newTodo);
+                    (String newTodo, String newDate) {
+                      provider.addNewTodo(newTodo, newDate);
                     },
                   ),
                   behavior: HitTestBehavior.opaque,

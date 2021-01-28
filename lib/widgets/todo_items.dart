@@ -6,8 +6,9 @@ import '../models/todo.dart';
 class TodoItems extends StatefulWidget {
   static const routeName = '/todo-items';
   final Todo todo;
+  final Todo date;
 
-  const TodoItems({this.todo});
+  const TodoItems({this.todo, this. date});
 
   @override
   _TodoItemsState createState() => _TodoItemsState();

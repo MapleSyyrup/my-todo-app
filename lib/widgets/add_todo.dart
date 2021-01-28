@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddTodo extends StatefulWidget {
-  final Function(String) addTodo;
+  final Function(String, String) addTodo;
 
   const AddTodo(this.addTodo);
 
@@ -14,12 +14,13 @@ class _AddTodoState extends State<AddTodo> {
 
   void submitTodo() {
     final enteredTodo = _todoController.text;
+    final date = DateTime.now().toString();
 
     if (enteredTodo.isEmpty) {
       return;
     }
 
-    widget.addTodo(enteredTodo);
+    widget.addTodo(enteredTodo, date);
 
     Navigator.of(context).pop();
   }
