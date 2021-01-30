@@ -16,14 +16,16 @@ class TodoOverviewScreen extends StatefulWidget {
 class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<TodoProvider>(context, listen: true);
+    final TodoProvider provider = Provider.of<TodoProvider>(context, listen: true);
+
+    /// listen is set to true to trigger a new state build
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('My Todo'),
       ),
-      resizeToAvoidBottomInset: false, //this is needed so the image.asset will not move when the keyboard is in use
+      resizeToAvoidBottomInset: false, /// this is needed so the image.asset will not move when the keyboard is in use
       body: provider.todoList.isEmpty
           ? LayoutBuilder(
               builder: (context, constraints) {
