@@ -27,10 +27,12 @@ class TodoProvider with ChangeNotifier {
     } else {
       _todoList.putIfAbsent(
           newDate,
-          () => Todo(
+          () {
+            return Todo(
                 task: newtodo,
                 date: newDate,
-              ));
+              );
+          });
     }
     notifyListeners();
   }

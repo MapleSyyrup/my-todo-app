@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/todo.dart';
+import '../models/custom_colors.dart';
 
 /*TodoItems = shows the list of todos 
 CheckboxListTile = creates a combination of checkbox and a list tile
@@ -44,11 +45,9 @@ class _TodoItemsState extends State<TodoItems> {
         ),
         controlAffinity: ListTileControlAffinity.leading,
         onChanged: (bool completedTask) {
-          setState(() {
-            _isCompleted = completedTask;
-          });
+          setState(() => _isCompleted = completedTask);
         },
-        tileColor: _isCompleted ? Color.fromRGBO(202, 240, 248, 1) : Color.fromRGBO(144, 224, 239, 1),
+        tileColor: _isCompleted ? isCompletedTheme : isNotCompletedTheme,
       ),
     );
   }

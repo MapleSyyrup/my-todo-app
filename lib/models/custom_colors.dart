@@ -26,7 +26,7 @@ Map<int, Color> accentThemeColor = {
   900: const Color.fromRGBO(0, 119, 182, 1),
 };
 
-Map<int, Color> canvasThemeColor = {
+Map<int, Color> isCompletedThemeColor = {
   50: const Color.fromRGBO(202, 240, 248, .1),
   100: const Color.fromRGBO(202, 240, 248, .2),
   200: const Color.fromRGBO(202, 240, 248, .3),
@@ -39,6 +39,20 @@ Map<int, Color> canvasThemeColor = {
   900: const Color.fromRGBO(202, 240, 248, 1),
 };
 
+Map<int, Color> isNotCompletedThemeColor = {
+  50: const Color.fromRGBO(144, 244, 239, .1),
+  100: const Color.fromRGBO(144, 244, 239, .2),
+  200: const Color.fromRGBO(144, 244, 239, .3),
+  300: const Color.fromRGBO(144, 244, 239, .4),
+  400: const Color.fromRGBO(144, 244, 239, .5),
+  500: const Color.fromRGBO(144, 244, 239, .6),
+  600: const Color.fromRGBO(144, 244, 239, .7),
+  700: const Color.fromRGBO(144, 244, 239, .8),
+  800: const Color.fromRGBO(144, 244, 239, .9),
+  900: const Color.fromRGBO(144, 244, 239, 1),
+};
+
 MaterialColor primaryTheme = MaterialColor(0xFF023E8A, primaryThemeColor);
 MaterialColor accentTheme = MaterialColor(0xFF0077B6, accentThemeColor);
-MaterialColor canvasTheme = MaterialColor(0xFFCAF0F8, canvasThemeColor);
+MaterialColor isCompletedTheme = MaterialColor(0xFFCAF0F8, isCompletedThemeColor);
+MaterialColor isNotCompletedTheme = MaterialColor(0xFF90E0EF, isNotCompletedThemeColor);
