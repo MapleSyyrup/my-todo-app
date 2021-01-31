@@ -16,16 +16,17 @@ class TodoOverviewScreen extends StatefulWidget {
 class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
   @override
   Widget build(BuildContext context) {
-    final TodoProvider provider = Provider.of<TodoProvider>(context, listen: true);
-
     /// listen is set to true to trigger a new state build
+    final TodoProvider provider = Provider.of<TodoProvider>(context, listen: true);
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('My Todo'),
       ),
-      resizeToAvoidBottomInset: false, /// this is needed so the image.asset will not move when the keyboard is in use
+      resizeToAvoidBottomInset: false,
+
+      /// this is needed so the image.asset will not move when the keyboard is in use
       body: provider.todoList.isEmpty
           ? LayoutBuilder(
               builder: (context, constraints) {
@@ -55,9 +56,7 @@ class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
               itemCount: provider.todoList.length,
               itemBuilder: (ctx, i) {
                 final todo = provider.todoList.values.toList()[i];
-                return TodoItems(
-                  todo: todo,
-                );
+                return TodoItems(todo: todo);
               },
             ),
 
@@ -71,9 +70,7 @@ class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
                 return GestureDetector(
                   onTap: () {},
                   child: AddTodo(
-                    (String newTodo, String newDate) {
-                      provider.addNewTodo(newTodo, newDate);
-                    },
+                    (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
                   ),
                   behavior: HitTestBehavior.opaque,
                 );

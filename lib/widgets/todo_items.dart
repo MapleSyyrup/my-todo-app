@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 
 import '../models/todo.dart';
 
+/*TodoItems = shows the list of todos */
+
 class TodoItems extends StatefulWidget {
   static const routeName = '/todo-items';
   final Todo todo;

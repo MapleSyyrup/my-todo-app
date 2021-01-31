@@ -9,8 +9,7 @@ class Routers {
       case TodoOverviewScreen.routeName:
         return MaterialPageRoute(builder: (BuildContext context) => TodoOverviewScreen());
       case TodoItems.routeName:
-      // final todoArgs = setting.arguments as String;
-      return MaterialPageRoute(builder: (BuildContext context) => TodoItems());
+        return MaterialPageRoute(builder: (BuildContext context) => TodoItems());
       default:
         return MaterialPageRoute(builder: (BuildContext context) => TodoOverviewScreen());
     }

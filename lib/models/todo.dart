@@ -1,5 +1,10 @@
 import 'package:flutter/foundation.dart';
 
+/*Handles the user inputs of tasks
+
+required parameter task - holds the user input of task
+required parameter date - shows the date when the task was added in the list*/
+
 class Todo {
   final String task;
   final String date;
@@ -8,5 +13,4 @@ class Todo {
     @required this.task,
     @required this.date,
   });
-/// these parameters are mandatory. These are required to pass in a function where class Todo is called.
 }

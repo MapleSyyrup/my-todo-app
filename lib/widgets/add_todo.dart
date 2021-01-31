@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/*Handles the Add Todo Screen
+_todoController = holds the TextEditingController for todo
+submitTodo = executes when the done button is pressed
+ */
+
 class AddTodo extends StatefulWidget {
   final Function(String, String) addTodo;
 
