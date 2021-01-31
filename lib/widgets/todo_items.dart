@@ -44,9 +44,7 @@ class _TodoItemsState extends State<TodoItems> {
           style: TextStyle(fontStyle: FontStyle.italic),
         ),
         controlAffinity: ListTileControlAffinity.leading,
-        onChanged: (bool completedTask) {
-          setState(() => _isCompleted = completedTask);
-        },
+        onChanged: (bool completedTask) => setState(() => _isCompleted = completedTask),
         tileColor: _isCompleted ? isCompletedTheme : isNotCompletedTheme,
       ),
     );
