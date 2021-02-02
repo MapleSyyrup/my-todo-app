@@ -27,7 +27,7 @@ class _TodoItemsState extends State<TodoItems> {
 
   @override
   Widget build(BuildContext context) {
-    final TodoProvider provider = Provider.of<TodoProvider>(context, listen: true);
+    final TodoProvider provider = Provider.of<TodoProvider>(context);
 
     return Card(
       elevation: 5,
