@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:my_todo_app/provider/todo_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../models/todo.dart';
 import '../models/custom_colors.dart';
+import 'add_todo.dart';
 
 /*TodoItems = shows the list of todos 
 CheckboxListTile = creates a combination of checkbox and a list tile
@@ -24,6 +27,8 @@ class _TodoItemsState extends State<TodoItems> {
 
   @override
   Widget build(BuildContext context) {
+    final TodoProvider provider = Provider.of<TodoProvider>(context, listen: true);
+
     return Card(
       elevation: 5,
       margin: const EdgeInsets.symmetric(
@@ -46,6 +51,27 @@ class _TodoItemsState extends State<TodoItems> {
         controlAffinity: ListTileControlAffinity.leading,
         onChanged: (bool completedTask) => setState(() => _isCompleted = completedTask),
         tileColor: _isCompleted ? isCompletedTheme : isNotCompletedTheme,
+        secondary: IconButton(
+            icon: Icon(
+              Icons.edit,
+              color: primaryTheme,
+            ),
+            onPressed: () {
+               return showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (BuildContext context) {
+                return GestureDetector(
+                  onTap: () {},
+                  child: AddTodo(
+                    (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
+                  ),
+                  behavior: HitTestBehavior.opaque,
+                );
+              });
+            }),
+
+        // Provider.of<TodoProvider>(context).addNewTodo(newtodo, newDate),
       ),
     );
   }

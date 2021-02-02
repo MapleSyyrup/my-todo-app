@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/models/todo.dart';
+import 'package:provider/provider.dart';
+import '../provider/todo_provider.dart';
+// import '../models/todo.dart';
 
 /*Handles the Add Todo Screen
 _todoController = holds the TextEditingController for todo
@@ -16,16 +20,29 @@ class AddTodo extends StatefulWidget {
 
 class _AddTodoState extends State<AddTodo> {
   final _todoController = TextEditingController();
+  final _editedTodo = Todo(
+    task: '',
+    date: null,
+  );
 
   void submitTodo() {
-    final enteredTodo = _todoController.text;
-    final date = DateTime.now().toString();
+    // final enteredTodo = _todoController.text;
+    // final date = existingDate != null ? existingDate : DateTime.now().toString();
+    final todo = Todo(
+      task: _todoController.text,
+      date: _editedTodo.date ?? DateTime.now().toString(),
+    );
 
-    if (enteredTodo.isEmpty) {
+    if (todo.task.isEmpty) {
       return;
     }
+    // String newDate;
+    // String newtodo;
+    _editedTodo.date != null
+        ? Provider.of<TodoProvider>(context, listen: false).addNewTodo(_editedTodo.task, _editedTodo.date)
+        : Provider.of<TodoProvider>(context, listen: false).addNewTodo(todo.task, todo.date);
 
-    widget.addTodo(enteredTodo, date);
+    widget.addTodo(todo.task, todo.date);
 
     Navigator.of(context).pop();
   }
