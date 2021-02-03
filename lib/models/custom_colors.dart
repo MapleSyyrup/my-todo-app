@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Map of customized colors that are not present in Material Color
+
 Map<int, Color> primaryThemeColor = {
   50: const Color.fromRGBO(2, 62, 138, .1),
   100: const Color.fromRGBO(2, 62, 138, .2),
