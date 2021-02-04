@@ -17,17 +17,21 @@ class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     /// listen is set to true to trigger a new state build
-    final TodoProvider provider = Provider.of<TodoProvider>(context, listen: true);
+    final TodoProvider provider = Provider.of<TodoProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+
+        ///this is used to remove the back arrow
         title: const Text('My Todo'),
       ),
       resizeToAvoidBottomInset: false,
 
       /// this is needed so the image.asset will not move when the keyboard is in use
       body: provider.todoList.isEmpty
+
+          ///if the map of is empty, this will show a picture
           ? LayoutBuilder(
               builder: (context, constraints) {
                 return Column(
@@ -53,24 +57,24 @@ class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
               },
             )
           : ListView.builder(
+              ///if the map is not Empty, the list will be show
               itemCount: provider.todoList.length,
               itemBuilder: (ctx, i) {
                 final todo = provider.todoList.values.toList()[i];
                 return TodoItems(todo: todo);
               },
             ),
-
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {
+        onPressed: () { /// when the add button is pressed, showModalBottomSheet will show where the user can add a todo
           return showModalBottomSheet(
-              isScrollControlled: true,
+              isScrollControlled: true, ///this is to give a space for the keyboard
               context: context,
               builder: (BuildContext context) {
                 return GestureDetector(
                   onTap: () {},
-                  child: AddTodo(
-                    (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
+                  child: AddTodo( ///this function is called when adding a todo
+                    addTodo: (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
                   ),
                   behavior: HitTestBehavior.opaque,
                 );

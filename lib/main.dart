@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (ctx) => TodoProvider()),
+
+        ///Creates a ChangeNotifier for TodoProvider
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -25,7 +27,11 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(textTheme: ThemeData.light().textTheme.copyWith(headline6: TextStyle(fontSize: 20))),
         ),
         initialRoute: TodoOverviewScreen.routeName,
+
+        ///First route to show
         onGenerateRoute: Routers.generateRoute,
+
+        ///When the app is navigated to a named route, this callback is used
       ),
     );
   }

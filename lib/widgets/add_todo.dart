@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/models/todo.dart';
 
 /*Handles the Add Todo Screen
 _todoController = holds the TextEditingController for todo
@@ -7,8 +8,10 @@ submitTodo = executes when the done button is pressed
 
 class AddTodo extends StatefulWidget {
   final Function(String, String) addTodo;
+  final String task;
+  final String date;
 
-  const AddTodo(this.addTodo);
+  const AddTodo({this.addTodo, this.task, this.date});
 
   @override
   _AddTodoState createState() => _AddTodoState();
@@ -18,16 +21,32 @@ class _AddTodoState extends State<AddTodo> {
   final _todoController = TextEditingController();
 
   void submitTodo() {
-    final enteredTodo = _todoController.text;
-    final date = DateTime.now().toString();
+    /// this function is called when saving the todo
+    final todo = Todo(
+      task: _todoController.text,
+      date: widget.date ?? DateTime.now().toString(),
+    );
 
-    if (enteredTodo.isEmpty) {
+    if (todo.task.isEmpty) {
+      ///if task is empty, it will not be saved
       return;
     }
 
-    widget.addTodo(enteredTodo, date);
+    widget.addTodo(todo.task, todo.date);
+
+    ///addTodo throws the task and date
 
     Navigator.of(context).pop();
+
+    ///this closes the modalBottomSheet when the todo is saved
+  }
+
+  @override
+  void didChangeDependencies() {
+    /// this is called when the task changes
+    _todoController.text = widget.task;
+    _todoController.selection = TextSelection.fromPosition(TextPosition(offset: _todoController.text.length));
+    super.didChangeDependencies();
   }
 
   @override

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
+import 'package:my_todo_app/provider/todo_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../models/todo.dart';
 import '../models/custom_colors.dart';
+import 'add_todo.dart';
 
 /*TodoItems = shows the list of todos 
 CheckboxListTile = creates a combination of checkbox and a list tile
@@ -20,10 +23,12 @@ class TodoItems extends StatefulWidget {
 }
 
 class _TodoItemsState extends State<TodoItems> {
-  bool _isCompleted = false;
+  bool _isCompleted = false; ///this is used for the Checkbox
 
   @override
   Widget build(BuildContext context) {
+    final TodoProvider provider = Provider.of<TodoProvider>(context);
+
     return Card(
       elevation: 5,
       margin: const EdgeInsets.symmetric(
@@ -33,19 +38,42 @@ class _TodoItemsState extends State<TodoItems> {
       child: CheckboxListTile(
         value: _isCompleted,
         title: Text(
-          widget.todo.task,
+          widget.todo.task, ///task is thrown here to be shown in the list
           style: TextStyle(
             fontStyle: FontStyle.normal,
             fontSize: 20,
           ),
         ),
         subtitle: Text(
-          DateFormat.yMMMEd().add_jm().format(DateTime.parse(widget.todo.date)),
+          DateFormat.yMMMEd().add_jm().format(DateTime.parse(widget.todo.date)), ///date is thrown here as a subtitle
           style: TextStyle(fontStyle: FontStyle.italic),
         ),
-        controlAffinity: ListTileControlAffinity.leading,
-        onChanged: (bool completedTask) => setState(() => _isCompleted = completedTask),
-        tileColor: _isCompleted ? isCompletedTheme : isNotCompletedTheme,
+        controlAffinity: ListTileControlAffinity.leading, ///this is used to move the checkbox to the left
+        onChanged: (bool completedTask) => setState(() => _isCompleted = completedTask), /// if the task is checked, it is considered as completed
+        tileColor: _isCompleted ? isCompletedTheme : isNotCompletedTheme, /// tileColor to determine if the todo is completed or not
+        secondary: IconButton(
+            icon: Icon(
+              Icons.edit,
+              color: primaryTheme,
+            ),
+            onPressed: () {
+              return showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: AddTodo(
+                        addTodo: (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
+                        task: widget.todo.task, ///this shows the edited task
+                        date: widget.todo.date, ///this shows the existing date
+                      ),
+                      behavior: HitTestBehavior.opaque,
+                    );
+                  });
+            }),
+
+        // Provider.of<TodoProvider>(context).addNewTodo(newtodo, newDate),
       ),
     );
   }
