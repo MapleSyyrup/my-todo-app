@@ -23,7 +23,7 @@ class TodoItems extends StatefulWidget {
 }
 
 class _TodoItemsState extends State<TodoItems> {
-  bool _isCompleted = false; ///this is used for the Checkbox
+  bool _isCompleted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,42 +38,42 @@ class _TodoItemsState extends State<TodoItems> {
       child: CheckboxListTile(
         value: _isCompleted,
         title: Text(
-          widget.todo.task, ///task is thrown here to be shown in the list
+          widget.todo.task,
           style: TextStyle(
             fontStyle: FontStyle.normal,
             fontSize: 20,
           ),
         ),
         subtitle: Text(
-          DateFormat.yMMMEd().add_jm().format(DateTime.parse(widget.todo.date)), ///date is thrown here as a subtitle
+          DateFormat.yMMMEd().add_jm().format(DateTime.parse(widget.todo.date)),
           style: TextStyle(fontStyle: FontStyle.italic),
         ),
-        controlAffinity: ListTileControlAffinity.leading, ///this is used to move the checkbox to the left
-        onChanged: (bool completedTask) => setState(() => _isCompleted = completedTask), /// if the task is checked, it is considered as completed
-        tileColor: _isCompleted ? isCompletedTheme : isNotCompletedTheme, /// tileColor to determine if the todo is completed or not
+        controlAffinity: ListTileControlAffinity.leading,
+        onChanged: (bool completedTask) => setState(() => _isCompleted = completedTask),
+        tileColor: _isCompleted ? isCompletedTheme : isNotCompletedTheme,
         secondary: IconButton(
-            icon: Icon(
-              Icons.edit,
-              color: primaryTheme,
-            ),
-            onPressed: () {
-              return showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: AddTodo(
-                        addTodo: (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
-                        task: widget.todo.task, ///this shows the edited task
-                        date: widget.todo.date, ///this shows the existing date
-                      ),
-                      behavior: HitTestBehavior.opaque,
-                    );
-                  });
-            }),
-
-        // Provider.of<TodoProvider>(context).addNewTodo(newtodo, newDate),
+          icon: Icon(
+            Icons.edit,
+            color: primaryTheme,
+          ),
+          onPressed: () {
+            return showModalBottomSheet(
+                isScrollControlled: true,
+                context: context,
+                builder: (BuildContext context) {
+                  Todo todo = widget.todo;
+                  return GestureDetector(
+                    onTap: () {},
+                    child: AddTodo(
+                      addTodo: (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
+                      task: todo.task,
+                      date: todo.date,
+                    ),
+                    behavior: HitTestBehavior.opaque,
+                  );
+                });
+          },
+        ),
       ),
     );
   }

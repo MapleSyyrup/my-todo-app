@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/todo_overview_screen.dart';
 import '../widgets/todo_items.dart';
 
-/* 
-Class for routers for easy reference 
-*/
-
+///Class for routers for easy reference
 class Routers {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
