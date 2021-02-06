@@ -24,6 +24,9 @@ class TodoProvider with ChangeNotifier {
   ///count of the _todoList
   int get todoCount => _todoList.length;
 
+  ///Adds a new todo in the map.
+  ///newTodo = contains the task
+  ///newDate = contains the date when the todo is added by the user
   void addNewTodo(String newTodo, String newDate) {
     if (_todoList.containsKey(newDate)) {
       /// if the date is existing, the task will update
@@ -41,6 +44,7 @@ class TodoProvider with ChangeNotifier {
   }
 
   ///Removes a task
+  ///todoDate = holds the date as the key in the map
   void removeItem(String todoDate) {
     _todoList.remove(todoDate);
     notifyListeners();

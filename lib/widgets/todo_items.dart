@@ -25,8 +25,6 @@ class TodoItems extends StatefulWidget {
 class _TodoItemsState extends State<TodoItems> {
   bool _isCompleted = false;
 
-  ///this is used for the Checkbox
-
   @override
   Widget build(BuildContext context) {
     final TodoProvider provider = Provider.of<TodoProvider>(context);
@@ -63,12 +61,13 @@ class _TodoItemsState extends State<TodoItems> {
                 isScrollControlled: true,
                 context: context,
                 builder: (BuildContext context) {
+                  Todo todo = widget.todo;
                   return GestureDetector(
                     onTap: () {},
                     child: AddTodo(
                       addTodo: (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
-                      task: widget.todo.task,
-                      date: widget.todo.date,
+                      task: todo.task,
+                      date: todo.date,
                     ),
                     behavior: HitTestBehavior.opaque,
                   );

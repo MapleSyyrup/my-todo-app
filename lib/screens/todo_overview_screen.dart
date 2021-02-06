@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/todo_items.dart';
 import '../models/constants.dart';
 import '../provider/todo_provider.dart';
 import '../widgets/add_todo.dart';
+import '../widgets/dismissible.dart';
 
 class TodoOverviewScreen extends StatefulWidget {
   static const routeName = '/todo-overview';
@@ -53,47 +53,7 @@ class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
               itemCount: provider.todoList.length,
               itemBuilder: (ctx, i) {
                 final todo = provider.todoList.values.toList()[i];
-                return Dismissible(
-                  key: ValueKey(todo.date),
-                  child: TodoItems(todo: todo),
-                  background: Container(
-                    color: Theme.of(context).errorColor,
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.only(right: 20),
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 4,
-                    ),
-                    child: Icon(
-                      Icons.delete,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
-                  direction: DismissDirection.endToStart,
-                  confirmDismiss: (direction) {
-                    return showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text('Are you sure?'),
-                        content: Text('Do you want to remove the task?'),
-                        actions: [
-                          FlatButton(
-                            onPressed: () => Navigator.of(context).pop(false),
-                            child: Text('No'),
-                          ),
-                          FlatButton(
-                            onPressed: () => Navigator.of(context).pop(true),
-                            child: Text('Yes'),
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                  onDismissed: (direction) {
-                    Provider.of<TodoProvider>(context, listen: false).removeItem(todo.date);
-                  },
-                );
+                return BuildDismissible(todo: todo);
               },
             ),
       floatingActionButton: FloatingActionButton(
