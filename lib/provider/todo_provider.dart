@@ -13,27 +13,36 @@ addNewTodo = function to add a task in the list based on the newDate
  else, a new task will be added*/
 
 class TodoProvider with ChangeNotifier {
-  Map<String, Todo> _todoList = {}; ///Map for _todolist
+  ///Map for _todolist
+  Map<String, Todo> _todoList = {};
 
+  /// getter of _todoList
   Map<String, Todo> get todoList {
-    return {..._todoList}; /// getter of _todoList
+    return {..._todoList};
   }
 
-  int get todoCount => _todoList.length; ///count of the _todoList
+  ///count of the _todoList
+  int get todoCount => _todoList.length;
 
   void addNewTodo(String newTodo, String newDate) {
-    if (_todoList.containsKey(newDate)) { /// if the date is existing, the task will update
+    if (_todoList.containsKey(newDate)) {
+      /// if the date is existing, the task will update
       _todoList.update(newDate, (existing) => Todo(task: newTodo, date: existing.date));
-    } else { ///if the date is not present, a new todo will be added in the map
-      _todoList.putIfAbsent(
-          newDate,
-          () {
-            return Todo(
-                task: newTodo,
-                date: newDate,
-              );
-          });
+    } else {
+      ///if the date is not present, a new todo will be added in the map
+      _todoList.putIfAbsent(newDate, () {
+        return Todo(
+          task: newTodo,
+          date: newDate,
+        );
+      });
     }
-    notifyListeners(); ///notifyListeners notify the provider for any changes in the map
+    notifyListeners();
+  }
+
+  ///Removes a task
+  void removeItem(String todoDate) {
+    _todoList.remove(todoDate);
+    notifyListeners();
   }
 }

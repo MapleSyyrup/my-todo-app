@@ -16,22 +16,15 @@ class TodoOverviewScreen extends StatefulWidget {
 class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
   @override
   Widget build(BuildContext context) {
-    /// listen is set to true to trigger a new state build
-    final TodoProvider provider = Provider.of<TodoProvider>(context);
+    final TodoProvider provider = Provider.of<TodoProvider>(context, listen: true);
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-
-        ///this is used to remove the back arrow
         title: const Text('My Todo'),
       ),
       resizeToAvoidBottomInset: false,
-
-      /// this is needed so the image.asset will not move when the keyboard is in use
       body: provider.todoList.isEmpty
-
-          ///if the map of is empty, this will show a picture
           ? LayoutBuilder(
               builder: (context, constraints) {
                 return Column(
@@ -57,23 +50,62 @@ class _TodoOverviewScreenState extends State<TodoOverviewScreen> {
               },
             )
           : ListView.builder(
-              ///if the map is not Empty, the list will be show
               itemCount: provider.todoList.length,
               itemBuilder: (ctx, i) {
                 final todo = provider.todoList.values.toList()[i];
-                return TodoItems(todo: todo);
+                return Dismissible(
+                  key: ValueKey(todo.date),
+                  child: TodoItems(todo: todo),
+                  background: Container(
+                    color: Theme.of(context).errorColor,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 20),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 4,
+                    ),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  direction: DismissDirection.endToStart,
+                  confirmDismiss: (direction) {
+                    return showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Are you sure?'),
+                        content: Text('Do you want to remove the task?'),
+                        actions: [
+                          FlatButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: Text('No'),
+                          ),
+                          FlatButton(
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: Text('Yes'),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                  onDismissed: (direction) {
+                    Provider.of<TodoProvider>(context, listen: false).removeItem(todo.date);
+                  },
+                );
               },
             ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () { /// when the add button is pressed, showModalBottomSheet will show where the user can add a todo
+        onPressed: () {
           return showModalBottomSheet(
-              isScrollControlled: true, ///this is to give a space for the keyboard
+              isScrollControlled: true,
               context: context,
               builder: (BuildContext context) {
                 return GestureDetector(
                   onTap: () {},
-                  child: AddTodo( ///this function is called when adding a todo
+                  child: AddTodo(
                     addTodo: (String newTodo, String newDate) => provider.addNewTodo(newTodo, newDate),
                   ),
                   behavior: HitTestBehavior.opaque,

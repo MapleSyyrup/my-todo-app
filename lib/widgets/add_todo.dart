@@ -37,8 +37,6 @@ class _AddTodoState extends State<AddTodo> {
     ///addTodo throws the task and date
 
     Navigator.of(context).pop();
-
-    ///this closes the modalBottomSheet when the todo is saved
   }
 
   @override
