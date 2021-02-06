@@ -5,7 +5,8 @@ import '../provider/todo_provider.dart';
 import '../models/todo.dart';
 import 'todo_items.dart';
 
-
+///Dismissible list of todos
+///Used in Todo Overview Screen
 class BuildDismissible extends StatelessWidget {
   const BuildDismissible({
     Key key,
